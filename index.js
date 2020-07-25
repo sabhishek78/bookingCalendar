@@ -47,11 +47,16 @@ class BookingCalendar{
       return absoluteTime;
     }
     earnings(){
-      return this.log.reduce(([startTime,endTime])=>endTime-startTime)/60*this.rate;
+      let totalTime=0;
+      for(let i=0;i<this.log.length;i++){
+         totalTime+=this.log[i][1]-this.log[i][0];
+      }
+     return totalTime*10;
     }
 }
 let bookings = new BookingCalendar(600);
 console.log(bookings.book('10:10', '11:20')); // returns true
 console.log(bookings.book('11:15', '12:25'));
 console.log(bookings.book('11:30', '12:30'));
+console.log(bookings.log);
 console.log(bookings.earnings());
